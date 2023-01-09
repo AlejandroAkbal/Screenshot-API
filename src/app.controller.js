@@ -1,5 +1,6 @@
-import {Controller, Dependencies, Get} from '@nestjs/common';
+import {Bind, Controller, Dependencies, Get, Query, ValidationPipe} from '@nestjs/common';
 import {AppService} from './app.service';
+import {CaptureDTO} from "./dto/CaptureDTO";
 
 @Controller({
     version: '1',
@@ -10,8 +11,15 @@ export class AppController {
         this.appService = appService;
     }
 
-    @Get()
-    getHello() {
-        return this.appService.getHello();
+    @Get('capture')
+    @Bind(Query(new ValidationPipe({
+        transform: true,
+        whitelist: true,
+        forbidNonWhitelisted: true,
+        expectedType: CaptureDTO
+    })))
+    getCapture(query) {
+
+        return query;
     }
 }
