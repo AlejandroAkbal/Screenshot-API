@@ -3,6 +3,7 @@ import {FastifyAdapter} from '@nestjs/platform-fastify';
 import {AppModule} from './app.module';
 import {VersioningType} from "@nestjs/common";
 import compression from '@fastify/compress'
+import helmet from '@fastify/helmet'
 
 async function bootstrap() {
     const app = await NestFactory.create(
@@ -14,6 +15,7 @@ async function bootstrap() {
         type: VersioningType.URI,
     });
 
+    app.register(helmet)
     await app.register(compression, {encodings: ['gzip', 'deflate']});
 
     await app.listen(3000, '0.0.0.0');
