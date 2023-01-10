@@ -18,6 +18,15 @@ async function bootstrap() {
     app.register(helmet)
     await app.register(compression, {encodings: ['gzip', 'deflate']});
 
+    // app.enableCors((req, callback) => {
+    //     const isDomainAllowed = ALLOWED_HOSTS.includes(req.hostname);
+    //
+    //     callback(null, {
+    //         origin: isDomainAllowed,
+    //         credentials: true,
+    //     });
+    // })
+
     await app.listen(3000, '0.0.0.0');
 }
 
