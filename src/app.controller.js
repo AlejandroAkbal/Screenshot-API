@@ -1,4 +1,4 @@
-import {Bind, Controller, Dependencies, Get, Query, StreamableFile, ValidationPipe} from '@nestjs/common';
+import {Bind, Controller, Dependencies, Get, Header, Query, StreamableFile, ValidationPipe} from '@nestjs/common';
 import {AppService} from './app.service';
 import {CaptureDTO} from "./dto/CaptureDTO";
 
@@ -18,6 +18,8 @@ export class AppController {
         forbidNonWhitelisted: true,
         expectedType: CaptureDTO
     })))
+    // Cache 1 hour on CDN | Cache 30 minutes on client | Stale while revalidate 30 minutes
+    @Header('Cache-Control', 'max-age=1800, s-maxage=3600, stale-while-revalidate=1800')
     async getCapture(query) {
         /**
          * @type {import('capture-website')}
