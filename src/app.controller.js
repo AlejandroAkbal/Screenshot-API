@@ -42,28 +42,29 @@ export class AppController {
      */
     const { default: captureWebsite } = await eval(`import('capture-website')`);
 
-    const websiteBuffer = await captureWebsite.buffer(
-      query.url,
-      {
-        width: query.width,
-        height: query.height,
+    const websiteBuffer = await captureWebsite.buffer(query.url, {
+      width: query.width,
+      height: query.height,
 
-        type: query.mime_type,
-        quality: query.quality,
+      type: query.mime_type,
+      quality: query.quality,
 
-        timeout: 5, // In seconds
-        delay: query.delay,
+      timeout: 5, // In seconds
+      delay: query.delay,
 
-        disableAnimations: true,
-        blockAds: true,
+      disableAnimations: true,
+      blockAds: true,
+
+      launchOptions: {
+        // Insecure way to allow it running in Docker
+        args: [
+          '--headless',
+          '--no-sandbox',
+          '--disable-setuid-sandbox',
+          '--disable-gpu',
+        ],
       },
-      {
-        launchOptions: {
-          // Insecure way to allow it running in Docker
-          args: ['--no-sandbox', '--disable-setuid-sandbox'],
-        },
-      },
-    );
+    });
 
     return new StreamableFile(websiteBuffer, {
       disposition: 'inline',
