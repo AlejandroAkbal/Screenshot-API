@@ -1,4 +1,4 @@
-import {Bind, Controller, Dependencies, Get, Query, ValidationPipe} from '@nestjs/common';
+import {Bind, Controller, Dependencies, Get, Query, StreamableFile, ValidationPipe} from '@nestjs/common';
 import {AppService} from './app.service';
 import {CaptureDTO} from "./dto/CaptureDTO";
 
@@ -18,8 +18,26 @@ export class AppController {
         forbidNonWhitelisted: true,
         expectedType: CaptureDTO
     })))
-    getCapture(query) {
+    async getCapture(query) {
+        /**
+         * @type {import('capture-website')}
+         */
+        const {default: captureWebsite} = await (eval(`import('capture-website')`));
 
-        return query;
+        const websiteBuffer = await captureWebsite.buffer(query.url, {
+            width: query.width,
+            height: query.height,
+
+            type: query.mime_type,
+            quality: query.quality,
+
+            timeout: 5, // In seconds
+            delay: query.delay,
+
+            disableAnimations: true,
+            blockAds: true,
+        });
+
+        return new StreamableFile(websiteBuffer)
     }
 }
