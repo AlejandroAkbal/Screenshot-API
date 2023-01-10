@@ -56,12 +56,17 @@ export class AppController {
       blockAds: true,
 
       launchOptions: {
-        // Insecure way to allow it running in Docker
         args: [
+          // Insecure way to allow it running in Docker
           '--headless',
           '--no-sandbox',
           '--disable-setuid-sandbox',
           '--disable-gpu',
+
+          // Aesthetic
+          '--hide-scrollbars',
+          '--mute-audio',
+          '--use-fake-ui-for-media-stream', // Pages that ask for webcam/microphone access
         ],
       },
     });
