@@ -38,6 +38,10 @@ export class AppController {
             blockAds: true,
         });
 
-        return new StreamableFile(websiteBuffer)
+        return new StreamableFile(websiteBuffer, {
+            disposition: 'inline',
+            type: `image/${query.mime_type}`,
+            length: websiteBuffer.length,
+        })
     }
 }
