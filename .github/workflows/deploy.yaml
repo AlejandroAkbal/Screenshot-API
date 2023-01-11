@@ -20,5 +20,5 @@ jobs:
         with:
           branch: main
           # Should look like: ssh://dokku@192.168.0.1:22/appname
-          git_remote_url: ${{ secrets.DOKKU_GIT_REMOTE_URL }}
+          git_remote_url: ${{ secrets.DOKKU_GIT_SSH_REMOTE_URL }}
           ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
