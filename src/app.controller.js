@@ -39,6 +39,8 @@ export class AppController {
 			width: query.width,
 			height: query.height,
 
+			scaleFactor: 1,
+
 			type: query.mime_type,
 			quality: query.quality,
 

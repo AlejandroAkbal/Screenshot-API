@@ -16,7 +16,8 @@ async function bootstrap() {
 
 	// app.register(helmet, {
 	// 	crossOriginResourcePolicy: false,
-	// 	crossOriginEmbedderPolicy: false
+	// 	crossOriginEmbedderPolicy: false,
+	//  crossOriginOpenerPolicy: false
 	// })
 
 	app.enableCors({
