@@ -1,6 +1,6 @@
 FROM node:16-alpine
 
-ARG PORT=3000
+ARG PORT=5000
 
 # Install chrome
 RUN apk add --no-cache \
