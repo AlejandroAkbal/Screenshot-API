@@ -4,6 +4,7 @@ import { AppModule } from './app.module'
 import { VersioningType } from '@nestjs/common'
 import compression from '@fastify/compress'
 import helmet from '@fastify/helmet'
+import { ALLOWED_HOSTS } from './config'
 
 async function bootstrap() {
 	const app = await NestFactory.create(AppModule, new FastifyAdapter())
@@ -15,16 +16,10 @@ async function bootstrap() {
 	app.register(helmet)
 	await app.register(compression, { encodings: ['gzip', 'deflate'] })
 
-	app.enableCors()
-
-	// app.enableCors((req, callback) => {
-	//     const isDomainAllowed = ALLOWED_HOSTS.includes(req.hostname);
-	//
-	//     callback(null, {
-	//         origin: isDomainAllowed,
-	//         credentials: true,
-	//     });
-	// })
+	app.enableCors({
+		origin: ALLOWED_HOSTS,
+		credentials: true
+	})
 
 	await app.listen(process.env.PORT || 3000, '0.0.0.0')
 }
