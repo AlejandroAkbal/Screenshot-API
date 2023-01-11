@@ -20,6 +20,11 @@ export class AppController {
     this.appService = appService;
   }
 
+  @Get('status')
+  getStatus() {
+    return { status: 'ok' };
+  }
+
   @Get('capture')
   @Bind(
     Query(
