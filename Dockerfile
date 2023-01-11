@@ -32,7 +32,7 @@ COPY --chown=pptruser:pptruser package*.json pnpm-lock.yaml ./
 
 ENV NODE_ENV production
 
-RUN pnpm install --prod
+RUN pnpm install
 
 # Bundle app source
 COPY --chown=pptruser:pptruser . .
