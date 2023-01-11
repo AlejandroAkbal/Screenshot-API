@@ -1,6 +1,6 @@
 FROM node:16-alpine
 
-ENV PORT 5000
+#ENV PORT 5000
 ENV NODE_ENV production
 
 # Install chrome
@@ -38,6 +38,6 @@ COPY --chown=pptruser:pptruser . .
 
 USER pptruser
 
-EXPOSE ${PORT}
+EXPOSE 5000
 
 CMD [ "pnpm", "start" ]
