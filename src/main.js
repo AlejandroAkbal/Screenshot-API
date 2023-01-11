@@ -13,8 +13,12 @@ async function bootstrap() {
 		type: VersioningType.URI
 	})
 
-	app.register(helmet)
 	await app.register(compression, { encodings: ['gzip', 'deflate'] })
+
+	app.register(helmet, {
+		crossOriginResourcePolicy: false,
+		crossOriginEmbedderPolicy: false
+	})
 
 	app.enableCors({
 		origin: ALLOWED_HOSTS,
