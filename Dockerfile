@@ -1,6 +1,7 @@
 FROM node:16-alpine
 
-ARG PORT=5000
+ENV PORT=5000
+ENV NODE_ENV production
 
 # Install chrome
 RUN apk add --no-cache \
@@ -30,8 +31,6 @@ WORKDIR /app
 # Install dependencies
 COPY --chown=pptruser:pptruser package*.json pnpm-lock.yaml ./
 
-ENV NODE_ENV production
-
 RUN pnpm install
 
 # Bundle app source
@@ -39,6 +38,6 @@ COPY --chown=pptruser:pptruser . .
 
 USER pptruser
 
-EXPOSE $PORT
+EXPOSE ${PORT}
 
 CMD [ "pnpm", "start" ]
