@@ -15,10 +15,7 @@ async function bootstrap() {
 	app.register(helmet)
 	await app.register(compression, { encodings: ['gzip', 'deflate'] })
 
-	app.enableCors({
-		origin: true,
-		credentials: true
-	})
+	app.enableCors()
 
 	// app.enableCors((req, callback) => {
 	//     const isDomainAllowed = ALLOWED_HOSTS.includes(req.hostname);
