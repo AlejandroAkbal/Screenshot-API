@@ -5,6 +5,26 @@
 {{ $upstream_port := index $port_map_list 2 }}
 
 {{ if eq $scheme "http" }}
+
+# --- Custom configuration
+
+# --- Cache
+# https://www.nginx.com/blog/nginx-caching-guide/
+
+# Explanation
+# - Maximum cache size is 100 MB
+# - Cache is deleted when not used for 1440 minutes (1 day)
+proxy_cache_path /tmp/dokku_nginx_cache levels=1:2 keys_zone=dokku_nginx_cache:5m max_size=100m inactive=1440m use_temp_path=off;
+
+# --- Rate limit
+# https://www.nginx.com/blog/rate-limiting-nginx/
+
+# Explanation
+# - Maximum 1 requests per minute
+limit_req_zone $binary_remote_addr zone=dokku_nginx_rate_limit:5m rate=1r/m;
+
+# --- End of custom configuration
+
 server {
   listen      [{{ $.NGINX_BIND_ADDRESS_IP6 }}]:{{ $listen_port }};
   listen      {{ if $.NGINX_BIND_ADDRESS_IP4 }}{{ $.NGINX_BIND_ADDRESS_IP4 }}:{{end}}{{ $listen_port }};
@@ -90,6 +110,32 @@ server {
     gzip_types    text/css text/javascript text/xml text/plain text/x-component application/javascript application/x-javascript application/json application/xml  application/rss+xml font/truetype application/x-font-ttf font/opentype application/vnd.ms-fontobject image/svg+xml;
     gzip_vary on;
     gzip_comp_level  6;
+
+    # --- Custom configuration
+
+    # Cache
+    proxy_cache dokku_nginx_cache;
+
+    proxy_cache_revalidate on;
+
+    proxy_cache_min_uses 2;
+
+    proxy_cache_use_stale error timeout invalid_header updating http_500 http_502 http_503 http_504;
+    proxy_cache_background_update on;
+    proxy_cache_lock on;
+
+    add_header X-Cache-Status $upstream_cache_status;
+
+
+    # Rate limit
+
+    # Explanation
+    # - Maximum 3 burst requests
+    # - The first 15 requests are executed instantly. The rest are delayed.
+    # - Requests over the maximum are blocked.
+    limit_req zone=dokku_nginx_rate_limit burst=3 delay=2;
+
+    # --- End of custom configuration
 
     proxy_pass  http://{{ $.APP }}-{{ $upstream_port }};
     {{ if eq $.HTTP2_PUSH_SUPPORTED "true" }}http2_push_preload on; {{ end }}
