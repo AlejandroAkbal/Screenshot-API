@@ -8,8 +8,6 @@
     Screenshot API
 </h1>
 
-## Description
-
 A simple self-hosted API to take screenshots of websites using Puppeteer.
 
 Ready to deploy to [Dokku](https://dokku.com/).
@@ -24,10 +22,10 @@ Check the [Dockerfile](Dockerfile) to see how the image is built.
 
 ### Endpoints
 
-#### GET /capture
+#### GET /v1/capture
 
 | Parameter | Type   | Default Value | Description            |
-| --------- | ------ | ------------- | ---------------------- |
+|-----------|--------|---------------|------------------------|
 | url       | string |               | URL to capture         |
 | width     | number | 1024          | Width of the viewport  |
 | height    | number | 768           | Height of the viewport |
