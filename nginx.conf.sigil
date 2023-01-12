@@ -21,7 +21,7 @@ proxy_cache_path /tmp/dokku_screenshot-api_nginx_cache levels=1:2 keys_zone=dokk
 
 # Explanation
 # - Maximum 1 requests per minute
-limit_req_zone $binary_remote_addr zone=dokku_screenshot-api_nginx_rate_limit:5m rate=1r/m;
+limit_req_zone $binary_remote_addr zone=dokku_screenshot-api_nginx_rate_limit:5m rate=3r/m;
 
 # --- End of custom configuration
 
@@ -130,10 +130,10 @@ server {
     # Rate limit
 
     # Explanation
-    # - Maximum 3 burst requests
-    # - The first 15 requests are executed instantly. The rest are delayed.
+    # - Maximum 5 burst requests
+    # - The first 2 requests are executed instantly. The rest are delayed.
     # - Requests over the maximum are blocked.
-    limit_req zone=dokku_screenshot-api_nginx_rate_limit burst=3 delay=2;
+    limit_req zone=dokku_screenshot-api_nginx_rate_limit burst=5 delay=2;
 
     # --- End of custom configuration
 
