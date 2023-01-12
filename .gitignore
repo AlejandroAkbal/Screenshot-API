@@ -1,3 +1,6 @@
+### Custom
+engine.bin
+
 ### VisualStudioCode template
 .vscode/*
 !.vscode/settings.json
