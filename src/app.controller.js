@@ -44,7 +44,7 @@ export class AppController {
 			type: query.mime_type,
 			quality: query.quality,
 
-			timeout: 5, // In seconds
+			timeout: 10, // In seconds
 			delay: query.delay,
 
 			disableAnimations: true,
