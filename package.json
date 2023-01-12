@@ -24,6 +24,7 @@
     "@fastify/compress": "^6.2.0",
     "@fastify/helmet": "^10.1.0",
     "@nestjs/common": "^9.0.0",
+    "@nestjs/config": "^2.2.0",
     "@nestjs/core": "^9.0.0",
     "@nestjs/platform-fastify": "^9.2.1",
     "capture-website": "^3.2.0",

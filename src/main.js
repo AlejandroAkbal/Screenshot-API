@@ -3,10 +3,11 @@ import { FastifyAdapter } from '@nestjs/platform-fastify'
 import { AppModule } from './app.module'
 import { VersioningType } from '@nestjs/common'
 import compression from '@fastify/compress'
-import { ALLOWED_HOSTS } from './config'
+import { ConfigService } from '@nestjs/config'
 
 async function bootstrap() {
 	const app = await NestFactory.create(AppModule, new FastifyAdapter())
+	const configService = app.get(ConfigService)
 
 	app.enableVersioning({
 		type: VersioningType.URI
@@ -21,11 +22,11 @@ async function bootstrap() {
 	// })
 
 	app.enableCors({
-		origin: ALLOWED_HOSTS,
+		origin: configService.get('allowedHosts'),
 		credentials: true
 	})
 
-	await app.listen(process.env.PORT || 3000, '0.0.0.0')
+	await app.listen(configService.get('port'), '0.0.0.0')
 }
 
 bootstrap()

@@ -1,7 +1,5 @@
-export const ALLOWED_HOSTS = [
-    'localhost',
-    'akbal.dev',
-    'r34.app',
-    'hentaiporn.app',
-    'installpwa.com'
-]
+export default () => ({
+	port: parseInt(process.env.PORT, 10) ?? 5000,
+
+	allowedHosts: process.env.ALLOWED_HOSTS.split(', ') ?? ['localhost']
+})
