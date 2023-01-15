@@ -13,8 +13,8 @@
 
 # Explanation
 # - Maximum cache size is 100 MB
-# - Cache is deleted when not used for 1440 minutes (1 day)
-proxy_cache_path /tmp/dokku_screenshot-api_nginx_cache levels=1:2 keys_zone=dokku_screenshot-api_nginx_cache:5m max_size=100m inactive=1440m use_temp_path=off;
+# - Cache is deleted when not used for 90 minutes
+proxy_cache_path /tmp/dokku_screenshot-api_nginx_cache levels=1:2 keys_zone=dokku_screenshot-api_nginx_cache:5m max_size=100m inactive=90m use_temp_path=off;
 
 # --- Rate limit
 # https://www.nginx.com/blog/rate-limiting-nginx/

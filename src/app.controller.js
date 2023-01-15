@@ -27,7 +27,7 @@ export class AppController {
 			})
 		)
 	)
-	// Cache 1 hour on CDN | Cache 30 minutes on client | Stale while revalidate 30 minutes
+	// Cache 30 minutes on client | Cache 1 hour on CDN | Stale while revalidate 30 minutes
 	@Header('Cache-Control', 'max-age=1800, s-maxage=3600, stale-while-revalidate=1800')
 	async getCapture(query) {
 		/**
