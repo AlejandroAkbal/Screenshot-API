@@ -22,4 +22,15 @@ describe('AppController', () => {
 		})
 	})
 
+	describe('/v1/capture', () => {
+		//
+
+		test('GET akbal.dev', async () => {
+			// Expect WEBP image
+
+			await appController.getCapture({
+				url: 'https://akbal.dev'
+			})
+		})
+	})
 })
