@@ -4,6 +4,7 @@ import { AppModule } from './app.module'
 import { VersioningType } from '@nestjs/common'
 import compression from '@fastify/compress'
 import { ConfigService } from '@nestjs/config'
+import { AppClusterService } from './cluster.service'
 
 async function bootstrap() {
 	const app = await NestFactory.create(AppModule, new FastifyAdapter())
@@ -29,4 +30,5 @@ async function bootstrap() {
 	await app.listen(configService.get('port'), '0.0.0.0')
 }
 
-bootstrap()
+// bootstrap()
+AppClusterService.clusterize(bootstrap)
