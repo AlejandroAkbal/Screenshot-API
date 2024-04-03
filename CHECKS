@@ -1,5 +1,0 @@
-WAIT=1
-TIMEOUT=30
-ATTEMPTS=10
-
-/v1/status ok
