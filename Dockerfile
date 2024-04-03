@@ -1,4 +1,4 @@
-FROM node:16-alpine
+FROM node:21-alpine
 
 #ENV PORT 5000
 ENV NODE_ENV production

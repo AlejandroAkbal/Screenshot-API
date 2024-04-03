@@ -5,6 +5,9 @@
   "author": "",
   "private": true,
   "license": "UNLICENSED",
+  "engines": {
+    "node": ">=21"
+  },
   "scripts": {
     "format": "prettier --write \"**/*.js\"",
     "start": "babel-node index.js",
