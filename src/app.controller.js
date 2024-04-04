@@ -39,12 +39,12 @@ export class AppController {
 			width: query.width,
 			height: query.height,
 
-			scaleFactor: 1,
+			scaleFactor: query.scale,
 
 			type: query.mime_type,
 			quality: query.quality,
 
-			timeout: 30, // In seconds // TODO: Set from queries
+			timeout: query.timeout,
 			delay: query.delay,
 
 			disableAnimations: true,
@@ -54,6 +54,7 @@ export class AppController {
 				'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36',
 
 			launchOptions: {
+				// https://cri.dev/posts/2020-04-04-Full-list-of-Chromium-Puppeteer-flags/
 				args: [
 					// Insecure way to allow it running in Docker
 					'--headless',
@@ -64,7 +65,7 @@ export class AppController {
 					// Aesthetic
 					'--hide-scrollbars',
 					'--mute-audio',
-					'--use-fake-ui-for-media-stream' // Pages that ask for webcam/microphone access
+					'--use-fake-ui-for-media-stream', // Pages that ask for webcam/microphone access
 				]
 			}
 		})

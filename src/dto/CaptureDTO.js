@@ -20,6 +20,20 @@ export class CaptureDTO {
 	height = 768
 
 	@IsInt()
+	@Max(2)
+	@Min(1)
+	@Transform(({ value }) => parseInt(value))
+	@IsOptional()
+	scale = 1
+
+	@IsInt()
+	@Max(60)
+	@Min(1)
+	@Transform(({ value }) => parseInt(value))
+	@IsOptional()
+	timeout = 15
+
+	@IsInt()
 	@Min(0)
 	@Max(5)
 	@Transform(({ value }) => parseInt(value))

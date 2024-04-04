@@ -24,14 +24,16 @@ Check the [Dockerfile](Dockerfile) to see how the image is built.
 
 #### GET /v1/capture
 
-| Parameter | Type   | Default Value | Description            |
-|-----------|--------|---------------|------------------------|
-| url       | string |               | URL to capture         |
-| width     | number | 1024          | Width of the viewport  |
-| height    | number | 768           | Height of the viewport |
-| delay     | number | 0             | Delay before capturing |
-| mime_type | string | webp          | Mime type of the image |
-| quality   | number | 0.8           | Quality of the image   |
+| Parameter | Type   | Default Value | Description                  |
+|-----------|--------|---------------|------------------------------|
+| url       | string |               | URL to capture               |
+| width     | number | 1024          | Viewport width               |
+| height    | number | 768           | Viewport height              |
+| scale     | number | 1             | Scale factor of the viewport |
+| timeout   | number | 15            | Timeout before giving up     |
+| delay     | number | 0             | Delay after page load        |
+| mime_type | string | webp          | jpg, png or webp             |
+| quality   | number | 0.8           | Image quality                |
 
 You can view the full query parameters [here](src/dto/CaptureDTO.js).
 
