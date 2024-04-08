@@ -81,5 +81,5 @@ pnpm run test:cov
 ```bash
 docker build -t screenshot-api .
 
-docker run -p 5000:5000 screenshot-api
+docker run --init -p 3000:3000 screenshot-api
 ```

@@ -1,4 +1,4 @@
-import { IsIn, IsInt, IsNotEmpty, IsNumber, IsOptional, IsString, IsUrl, Max, Min } from 'class-validator'
+import { IsIn, IsInt, IsNotEmpty, IsOptional, IsString, IsUrl, Max, Min } from 'class-validator'
 import { Transform } from 'class-transformer'
 
 export class CaptureDTO {
@@ -42,16 +42,16 @@ export class CaptureDTO {
 
 	@IsString()
 	@IsNotEmpty()
-	@IsIn(['jpeg', 'png', 'webp'])
+	@IsIn(['jpeg', 'png'])
 	@IsOptional()
-	mime_type: string = 'webp'
+	mime_type: 'jpeg' | 'png' = 'jpeg'
 
-	@IsNumber()
+	@IsInt()
 	@Min(0)
-	@Max(1)
+	@Max(100)
 	@Transform(({ value }) => parseFloat(value))
 	@IsOptional()
-	quality: number = 0.8
+	quality: number = 90
 }
 
 // export const captureDto = Joi.object({
