@@ -1,35 +1,13 @@
-import { Bind, Controller, Dependencies, Get, Header, Query, StreamableFile, ValidationPipe } from '@nestjs/common'
-import { AppService } from './app.service'
+import { Injectable, StreamableFile } from '@nestjs/common'
 import { CaptureDTO } from './dto/CaptureDTO'
 
-@Controller({
-	version: '1'
-})
-@Dependencies(AppService)
-export class AppController {
-	constructor(appService) {
-		this.appService = appService
-	}
-
-	@Get('status')
+@Injectable()
+export class AppService {
 	getStatus() {
 		return { status: 'ok' }
 	}
 
-	@Get('capture')
-	@Bind(
-		Query(
-			new ValidationPipe({
-				transform: true,
-				whitelist: true,
-				forbidNonWhitelisted: true,
-				expectedType: CaptureDTO
-			})
-		)
-	)
-	// Cache 12 hours on client | Cache 12 hours on CDN | Stale while revalidate 30 minutes
-	@Header('Cache-Control', 'max-age=43200, s-maxage=43200, stale-while-revalidate=1800')
-	async getCapture(query) {
+	async getCapture(query: CaptureDTO) {
 		/**
 		 * @type {import('capture-website')}
 		 */
@@ -65,7 +43,7 @@ export class AppController {
 					// Aesthetic
 					'--hide-scrollbars',
 					'--mute-audio',
-					'--use-fake-ui-for-media-stream', // Pages that ask for webcam/microphone access
+					'--use-fake-ui-for-media-stream' // Pages that ask for webcam/microphone access
 				]
 			}
 		})

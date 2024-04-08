@@ -1,13 +1,16 @@
 import { Injectable } from '@nestjs/common'
 import { availableParallelism } from 'os'
-import cluster from 'cluster'
 
-// TODO: Set to 1 for development
-const numCPUs = availableParallelism()
+// Fix for cluster import - https://stackoverflow.com/a/70320320
+import * as _cluster from 'cluster'
+
+const cluster = _cluster as unknown as _cluster.Cluster
+
+const numCPUs = process.env.NODE_ENV === 'production' ? availableParallelism() : 1
 
 @Injectable()
 export class AppClusterService {
-	static clusterize(callback) {
+	static clusterize(callback: Function) {
 		//
 
 		if (cluster.isPrimary) {

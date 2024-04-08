@@ -10,8 +10,6 @@
 
 A simple self-hosted API to take screenshots of websites using Puppeteer.
 
-Ready to deploy to [Dokku](https://dokku.com/).
-
 ### Technologies
 
 A [NestJS](https://nestjs.com/) wrapper around [capture-website](https://github.com/sindresorhus/capture-website).

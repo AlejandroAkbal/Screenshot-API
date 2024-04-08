@@ -3,55 +3,55 @@ import { Transform } from 'class-transformer'
 
 export class CaptureDTO {
 	@IsUrl()
-	url
+	url: string
 
 	@IsInt()
 	@Max(4096)
 	@Min(1)
 	@Transform(({ value }) => parseInt(value))
 	@IsOptional()
-	width = 1024
+	width: number = 1024
 
 	@IsInt()
 	@Max(4096)
 	@Min(1)
 	@Transform(({ value }) => parseInt(value))
 	@IsOptional()
-	height = 768
+	height: number = 768
 
 	@IsInt()
 	@Max(2)
 	@Min(1)
 	@Transform(({ value }) => parseInt(value))
 	@IsOptional()
-	scale = 1
+	scale: number = 1
 
 	@IsInt()
 	@Max(60)
 	@Min(1)
 	@Transform(({ value }) => parseInt(value))
 	@IsOptional()
-	timeout = 15
+	timeout: number = 15
 
 	@IsInt()
 	@Min(0)
 	@Max(5)
 	@Transform(({ value }) => parseInt(value))
 	@IsOptional()
-	delay = 0
+	delay: number = 0
 
 	@IsString()
 	@IsNotEmpty()
 	@IsIn(['jpeg', 'png', 'webp'])
 	@IsOptional()
-	mime_type = 'webp'
+	mime_type: string = 'webp'
 
 	@IsNumber()
 	@Min(0)
 	@Max(1)
 	@Transform(({ value }) => parseFloat(value))
 	@IsOptional()
-	quality = 0.8
+	quality: number = 0.8
 }
 
 // export const captureDto = Joi.object({
