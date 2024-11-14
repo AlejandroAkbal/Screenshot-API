@@ -1,3 +1,4 @@
+import { join } from 'path'
 import { NestFactory } from '@nestjs/core'
 import { FastifyAdapter, NestFastifyApplication } from '@nestjs/platform-fastify'
 import { AppModule } from './app.module'
@@ -10,6 +11,10 @@ import helmet from '@fastify/helmet'
 async function bootstrap() {
 	const app = await NestFactory.create<NestFastifyApplication>(AppModule, new FastifyAdapter())
 	const configService = app.get(ConfigService)
+
+	app.useStaticAssets({
+		root: join(__dirname, '..', 'public')
+	})
 
 	app.enableVersioning({
 		type: VersioningType.URI
