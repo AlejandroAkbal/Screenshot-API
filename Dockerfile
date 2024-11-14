@@ -4,6 +4,8 @@ ENV PORT 3000
 ENV NODE_ENV production
 
 # System dependencies
+RUN apk add --no-cache curl
+
 RUN npm install -g pnpm
 
 # Install chrome - https://github.com/Zenika/alpine-chrome/blob/master/Dockerfile
@@ -40,6 +42,8 @@ RUN pnpm build
 USER node
 
 EXPOSE $PORT
+
+HEALTHCHECK --interval=10s --timeout=5s --retries=3 CMD curl -f http://localhost:$PORT/v1/status || exit 1
 
 # WARN: use with --init (docker run --init)
 CMD [ "node", "dist/main.js" ]
