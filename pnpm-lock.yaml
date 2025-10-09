@@ -4,6 +4,9 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+overrides:
+  fastify: ^4.29.1
+
 importers:
 
   .:
@@ -18,31 +21,31 @@ importers:
         specifier: ^7.0.4
         version: 7.0.4
       '@nestjs/common':
-        specifier: ^10.4.7
+        specifier: ^10.4.20
         version: 10.4.20(class-transformer@0.5.1)(class-validator@0.14.2)(reflect-metadata@0.2.2)(rxjs@7.8.2)
       '@nestjs/config':
         specifier: ^3.3.0
         version: 3.3.0(@nestjs/common@10.4.20(class-transformer@0.5.1)(class-validator@0.14.2)(reflect-metadata@0.2.2)(rxjs@7.8.2))(rxjs@7.8.2)
       '@nestjs/core':
-        specifier: ^10.4.7
+        specifier: ^10.4.20
         version: 10.4.20(@nestjs/common@10.4.20(class-transformer@0.5.1)(class-validator@0.14.2)(reflect-metadata@0.2.2)(rxjs@7.8.2))(@nestjs/platform-express@10.4.20)(reflect-metadata@0.2.2)(rxjs@7.8.2)
       '@nestjs/platform-express':
-        specifier: ^10.4.7
+        specifier: ^10.4.20
         version: 10.4.20(@nestjs/common@10.4.20(class-transformer@0.5.1)(class-validator@0.14.2)(reflect-metadata@0.2.2)(rxjs@7.8.2))(@nestjs/core@10.4.20)
       '@nestjs/platform-fastify':
-        specifier: ^10.4.7
+        specifier: ^10.4.20
         version: 10.4.20(@fastify/static@7.0.4)(@nestjs/common@10.4.20(class-transformer@0.5.1)(class-validator@0.14.2)(reflect-metadata@0.2.2)(rxjs@7.8.2))(@nestjs/core@10.4.20)
       capture-website:
-        specifier: ^4.1.0
+        specifier: ^4.2.0
         version: 4.2.0(typescript@5.9.3)
       class-transformer:
         specifier: ^0.5.1
         version: 0.5.1
       class-validator:
-        specifier: ^0.14.1
+        specifier: ^0.14.2
         version: 0.14.2
       fastify:
-        specifier: ^4.28.1
+        specifier: ^4.29.1
         version: 4.29.1
       i:
         specifier: ^0.3.7
@@ -51,29 +54,29 @@ importers:
         specifier: ^0.2.2
         version: 0.2.2
       rxjs:
-        specifier: ^7.8.1
+        specifier: ^7.8.2
         version: 7.8.2
     devDependencies:
       '@nestjs/cli':
-        specifier: ^10.4.7
+        specifier: ^10.4.9
         version: 10.4.9
       '@nestjs/schematics':
         specifier: ^10.2.3
         version: 10.2.3(chokidar@3.6.0)(typescript@5.9.3)
       '@nestjs/testing':
-        specifier: ^10.4.7
+        specifier: ^10.4.20
         version: 10.4.20(@nestjs/common@10.4.20(class-transformer@0.5.1)(class-validator@0.14.2)(reflect-metadata@0.2.2)(rxjs@7.8.2))(@nestjs/core@10.4.20)(@nestjs/platform-express@10.4.20)
       '@types/express':
-        specifier: ^4.17.21
+        specifier: ^4.17.23
         version: 4.17.23
       '@types/jest':
         specifier: ^29.5.14
         version: 29.5.14
       '@types/node':
-        specifier: ^20.17.6
+        specifier: ^20.19.19
         version: 20.19.19
       '@types/supertest':
-        specifier: ^6.0.2
+        specifier: ^6.0.3
         version: 6.0.3
       '@typescript-eslint/eslint-plugin':
         specifier: ^7.18.0
@@ -82,19 +85,19 @@ importers:
         specifier: ^7.18.0
         version: 7.18.0(eslint@9.37.0)(typescript@5.9.3)
       eslint:
-        specifier: ^9.14.0
+        specifier: ^9.37.0
         version: 9.37.0
       eslint-config-prettier:
-        specifier: ^9.1.0
+        specifier: ^9.1.2
         version: 9.1.2(eslint@9.37.0)
       eslint-plugin-prettier:
-        specifier: ^5.2.1
+        specifier: ^5.5.4
         version: 5.5.4(@types/eslint@9.6.1)(eslint-config-prettier@9.1.2(eslint@9.37.0))(eslint@9.37.0)(prettier@3.6.2)
       jest:
         specifier: ^29.7.0
         version: 29.7.0(@types/node@20.19.19)(ts-node@10.9.2(@types/node@20.19.19)(typescript@5.9.3))
       prettier:
-        specifier: ^3.3.3
+        specifier: ^3.6.2
         version: 3.6.2
       source-map-support:
         specifier: ^0.5.21
@@ -103,10 +106,10 @@ importers:
         specifier: ^6.3.4
         version: 6.3.4
       ts-jest:
-        specifier: ^29.2.5
+        specifier: ^29.4.4
         version: 29.4.4(@babel/core@7.28.4)(@jest/transform@29.7.0)(@jest/types@29.6.3)(babel-jest@29.7.0(@babel/core@7.28.4))(jest-util@29.7.0)(jest@29.7.0(@types/node@20.19.19)(ts-node@10.9.2(@types/node@20.19.19)(typescript@5.9.3)))(typescript@5.9.3)
       ts-loader:
-        specifier: ^9.5.1
+        specifier: ^9.5.4
         version: 9.5.4(typescript@5.9.3)(webpack@5.97.1)
       ts-node:
         specifier: ^10.9.2
@@ -115,7 +118,7 @@ importers:
         specifier: ^4.2.0
         version: 4.2.0
       typescript:
-        specifier: ^5.6.3
+        specifier: ^5.9.3
         version: 5.9.3
 
 packages:
@@ -1733,9 +1736,6 @@ packages:
 
   fastify-plugin@4.5.1:
     resolution: {integrity: sha512-stRHYGeuqpEZTL1Ef0Ovr2ltazUT9g844X5z/zEBFLG8RYlpDiOCIG+ATvYEp+/zmc7sN29mcIMp8gvYplYPIQ==}
-
-  fastify@4.28.1:
-    resolution: {integrity: sha512-kFWUtpNr4i7t5vY2EJPCN2KgMVpuqfU4NjnJNCgiNB900oiDeYqaNDRcAfeBbOF5hGixixxcKnOU4KN9z6QncQ==}
 
   fastify@4.29.1:
     resolution: {integrity: sha512-m2kMNHIG92tSNWv+Z3UeTR9AWLLuo7KctC7mlFPtMEVrfjIhmQhkQnT9v15qA/BfVq3vvj134Y0jl9SBje3jXQ==}
@@ -4114,7 +4114,7 @@ snapshots:
       '@fastify/middie': 8.3.3
       '@nestjs/common': 10.4.20(class-transformer@0.5.1)(class-validator@0.14.2)(reflect-metadata@0.2.2)(rxjs@7.8.2)
       '@nestjs/core': 10.4.20(@nestjs/common@10.4.20(class-transformer@0.5.1)(class-validator@0.14.2)(reflect-metadata@0.2.2)(rxjs@7.8.2))(@nestjs/platform-express@10.4.20)(reflect-metadata@0.2.2)(rxjs@7.8.2)
-      fastify: 4.28.1
+      fastify: 4.29.1
       light-my-request: 6.3.0
       path-to-regexp: 3.3.0
       tslib: 2.8.1
@@ -5406,25 +5406,6 @@ snapshots:
   fast-uri@3.1.0: {}
 
   fastify-plugin@4.5.1: {}
-
-  fastify@4.28.1:
-    dependencies:
-      '@fastify/ajv-compiler': 3.6.0
-      '@fastify/error': 3.4.1
-      '@fastify/fast-json-stringify-compiler': 4.3.0
-      abstract-logging: 2.0.1
-      avvio: 8.4.0
-      fast-content-type-parse: 1.1.0
-      fast-json-stringify: 5.16.1
-      find-my-way: 8.2.2
-      light-my-request: 5.14.0
-      pino: 9.13.1
-      process-warning: 3.0.0
-      proxy-addr: 2.0.7
-      rfdc: 1.4.1
-      secure-json-parse: 2.7.0
-      semver: 7.7.3
-      toad-cache: 3.7.0
 
   fastify@4.29.1:
     dependencies:

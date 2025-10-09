@@ -5,8 +5,8 @@ import { AppModule } from './app.module'
 import { ValidationPipe, VersioningType } from '@nestjs/common'
 import { ConfigService } from '@nestjs/config'
 import { AppClusterService } from './cluster.service'
-import compression from '@fastify/compress'
-import helmet from '@fastify/helmet'
+import fastifyCompress from '@fastify/compress'
+import fastifyHelmet from '@fastify/helmet'
 
 async function bootstrap() {
 	const app = await NestFactory.create<NestFastifyApplication>(AppModule, new FastifyAdapter())
@@ -28,9 +28,9 @@ async function bootstrap() {
 		})
 	)
 
-	await app.register(compression, { encodings: ['gzip', 'deflate'] })
+	await app.register(fastifyCompress, { encodings: ['gzip', 'deflate'] })
 
-	await app.register(helmet, {
+	await app.register(fastifyHelmet, {
 		crossOriginResourcePolicy: false,
 		crossOriginEmbedderPolicy: false,
 		crossOriginOpenerPolicy: false
