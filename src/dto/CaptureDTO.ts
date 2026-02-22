@@ -44,7 +44,7 @@ export class CaptureDTO {
 	@IsNotEmpty()
 	@IsIn(['jpeg', 'png', 'webp'])
 	@IsOptional()
-	mime_type: string = 'webp'
+	mime_type: 'jpeg' | 'png' | 'webp' = 'webp'
 
 	@IsNumber()
 	@Min(0)
