@@ -1,7 +1,8 @@
 FROM node:24-alpine
 
-ENV PORT 3000
-ENV NODE_ENV production
+ENV PORT=3000
+ENV NODE_ENV=production
+ENV CI=true
 
 # System dependencies
 RUN apk add --no-cache curl
@@ -11,6 +12,7 @@ RUN npm install -g pnpm
 # Install chrome - https://github.com/Zenika/alpine-chrome/blob/master/Dockerfile
 RUN apk upgrade --no-cache --available \
     && apk add --no-cache \
+      chromium \
       chromium-swiftshader \
       ttf-freefont \
       font-noto-emoji \
@@ -46,4 +48,4 @@ EXPOSE $PORT
 HEALTHCHECK --interval=10s --timeout=5s --retries=3 CMD curl -f http://localhost:$PORT/v1/status || exit 1
 
 # WARN: use with --init (docker run --init)
-CMD [ "node", "dist/main.js" ]
+CMD [ "node", "dist/src/main.js" ]
