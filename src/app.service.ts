@@ -25,6 +25,8 @@ export class AppService {
 			timeout: query.timeout,
 			delay: query.delay,
 
+			throwOnHttpError: true,
+
 			disableAnimations: true,
 			blockAds: true,
 
