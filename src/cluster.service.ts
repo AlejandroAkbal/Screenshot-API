@@ -20,8 +20,9 @@ export class AppClusterService {
 				cluster.fork()
 			}
 
-			cluster.on('exit', (worker) => {
-				console.log(`Worker ${worker.process.pid} died. Restarting...`)
+			cluster.on('exit', (worker, code, signal) => {
+				console.log(`Worker ${worker.process.pid} died (code: ${code}, signal: ${signal}). Restarting...`)
+				cluster.fork()
 			})
 
 			//
