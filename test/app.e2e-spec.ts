@@ -45,7 +45,7 @@ describe('AppController (e2e)', () => {
 		})
 		expect(result.statusCode).toEqual(200)
 		expect(result.headers['content-type']).toMatch(/^image\/(webp|png|jpeg)/)
-		const buffer = Buffer.isBuffer(result.payload) ? result.payload : Buffer.from(result.payload)
+		const buffer = Buffer.isBuffer(result.rawPayload) ? result.rawPayload : Buffer.from(result.rawPayload)
 		expect(buffer.length).toBeGreaterThan(100)
 	}, 30_000)
 })
