@@ -48,4 +48,4 @@ EXPOSE $PORT
 HEALTHCHECK --interval=10s --timeout=5s --retries=3 CMD curl -f http://localhost:$PORT/v1/status || exit 1
 
 # WARN: use with --init (docker run --init)
-CMD [ "node", "dist/src/main.js" ]
+CMD [ "node", "dist/main.js" ]

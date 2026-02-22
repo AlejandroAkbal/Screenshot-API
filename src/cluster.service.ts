@@ -1,10 +1,6 @@
 import { Injectable } from '@nestjs/common'
 import { availableParallelism } from 'os'
-
-// Fix for cluster import - https://stackoverflow.com/a/70320320
-import * as _cluster from 'cluster'
-
-const cluster = _cluster as unknown as _cluster.Cluster
+import cluster from 'node:cluster'
 
 const numCPUs = process.env.NODE_ENV === 'production' ? availableParallelism() : 1
 
