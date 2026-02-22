@@ -66,14 +66,17 @@ pnpm run start:prod
 ### Test
 
 ```bash
-# unit tests
+# run tests
 pnpm run test
 
-# e2e tests
-pnpm run test:e2e
+# watch mode
+pnpm run test:watch
+```
 
-# test coverage
-pnpm run test:cov
+Tests that hit the capture endpoint require Chrome. Install it with:
+
+```bash
+npx puppeteer browsers install chrome
 ```
 
 ## Building for production

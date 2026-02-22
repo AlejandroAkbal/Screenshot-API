@@ -1,24 +1,51 @@
-import { Test, TestingModule } from '@nestjs/testing';
-import { INestApplication } from '@nestjs/common';
-import * as request from 'supertest';
-import { AppModule } from './../src/app.module';
+import { Test } from '@nestjs/testing'
+import { NestFastifyApplication } from '@nestjs/platform-fastify'
+import { ValidationPipe, VersioningType } from '@nestjs/common'
+import { FastifyAdapter } from '@nestjs/platform-fastify'
+import { AppModule } from './../src/app.module'
 
 describe('AppController (e2e)', () => {
-  let app: INestApplication;
+	let app: NestFastifyApplication
 
-  beforeEach(async () => {
-    const moduleFixture: TestingModule = await Test.createTestingModule({
-      imports: [AppModule],
-    }).compile();
+	beforeAll(async () => {
+		const moduleRef = await Test.createTestingModule({
+			imports: [AppModule]
+		}).compile()
 
-    app = moduleFixture.createNestApplication();
-    await app.init();
-  });
+		app = moduleRef.createNestApplication<NestFastifyApplication>(new FastifyAdapter())
+		app.enableVersioning({ type: VersioningType.URI })
+		app.useGlobalPipes(
+			new ValidationPipe({
+				transform: true,
+				whitelist: true,
+				forbidNonWhitelisted: true
+			})
+		)
+		await app.init()
+		await app.getHttpAdapter().getInstance().ready()
+	})
 
-  it('/ (GET)', () => {
-    return request(app.getHttpServer())
-      .get('/')
-      .expect(200)
-      .expect('Hello World!');
-  });
-});
+	afterAll(async () => {
+		await app.close()
+	})
+
+	it('/v1/status (GET)', async () => {
+		const result = await app.inject({
+			method: 'GET',
+			url: '/v1/status'
+		})
+		expect(result.statusCode).toEqual(200)
+		expect(result.json()).toEqual({ status: 'ok' })
+	})
+
+	it('/v1/capture (GET) returns image', async () => {
+		const result = await app.inject({
+			method: 'GET',
+			url: '/v1/capture?url=https://example.com&width=1024&height=768&mime_type=webp'
+		})
+		expect(result.statusCode).toEqual(200)
+		expect(result.headers['content-type']).toMatch(/^image\/(webp|png|jpeg)/)
+		const buffer = Buffer.isBuffer(result.payload) ? result.payload : Buffer.from(result.payload)
+		expect(buffer.length).toBeGreaterThan(100)
+	}, 30_000)
+})

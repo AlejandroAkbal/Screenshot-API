@@ -8,10 +8,7 @@ export class AppService {
 	}
 
 	async getCapture(query: CaptureDTO) {
-		/**
-		 * @type {import('capture-website')}
-		 */
-		const { default: captureWebsite } = await eval(`import('capture-website')`)
+		const { default: captureWebsite } = await import('capture-website')
 
 		const websiteBuffer = await captureWebsite.buffer(query.url, {
 			width: query.width,
