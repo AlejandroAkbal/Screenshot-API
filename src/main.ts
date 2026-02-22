@@ -13,7 +13,7 @@ async function bootstrap() {
 	const configService = app.get(ConfigService)
 
 	app.useStaticAssets({
-		root: join(__dirname, '..', 'public')
+		root: join(process.cwd(), 'public')
 	})
 
 	app.enableVersioning({
