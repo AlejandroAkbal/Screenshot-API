@@ -41,7 +41,10 @@ async function bootstrap() {
 		credentials: true
 	})
 
-	await app.listen(configService.get('port') as number, '0.0.0.0')
+	await app.listen({
+		port: configService.get('port') as number,
+		host: '0.0.0.0'
+	})
 }
 
 AppClusterService.clusterize(bootstrap)
