@@ -10,7 +10,7 @@ const numCPUs = process.env.NODE_ENV === 'production' ? availableParallelism() :
 
 @Injectable()
 export class AppClusterService {
-	static clusterize(callback: Function) {
+	static clusterize(callback: () => void) {
 		//
 
 		if (cluster.isPrimary) {
@@ -20,7 +20,7 @@ export class AppClusterService {
 				cluster.fork()
 			}
 
-			cluster.on('exit', (worker, code, signal) => {
+			cluster.on('exit', (worker) => {
 				console.log(`Worker ${worker.process.pid} died. Restarting...`)
 			})
 
